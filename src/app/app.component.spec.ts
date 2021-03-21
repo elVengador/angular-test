@@ -1,4 +1,7 @@
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
+import { By } from '@angular/platform-browser';
+import { RouterLink, RouterLinkWithHref, RouterOutlet } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
 
@@ -9,8 +12,9 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
       ],
+      schemas:[NO_ERRORS_SCHEMA]
     }).compileComponents();
   });
 
@@ -26,10 +30,15 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('angular-test');
   });
 
-  it('should render title', () => {
+  // test de existencia de directivas
+  it('Debe tener un router outlet', () => {
     const fixture = TestBed.createComponent(AppComponent);
-    fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('angular-test app is running!');
-  });
+    const debugElement = fixture.debugElement.query(By.directive(RouterOutlet))
+    expect(debugElement).not.toBe(null)
+  })
+  
+  
+  
+  
+
 });
